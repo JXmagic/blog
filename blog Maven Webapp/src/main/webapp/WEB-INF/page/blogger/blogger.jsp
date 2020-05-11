@@ -14,12 +14,14 @@
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
+    
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap-table/dist/bootstrap-table.css">
   </head>
 
   <body class="nav-md">
@@ -92,28 +94,9 @@
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
           </div>
         </div>
 
-        <!-- top navigation -->
-
-        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -123,6 +106,7 @@
                 <h3>Multilevel Menu <small> Page to demonstrate multilevel menu</small></h3>
               </div>
             </div>
+             <table id="table"></table>
           </div>
         </div>
         <!-- /page content -->
@@ -149,8 +133,50 @@
     
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/vendors/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/vendors/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script type="text/javascript">
-      
+      $("#table").bootstrapTable({
+           url: '/Home/GetDepartment',         //请求后台的URL（*）
+            method: 'get',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'Name',
+                title: '部门名称'
+            }, {
+                field: 'ParentName',
+                title: '上级部门'
+            }, {
+                field: 'Level',
+                title: '部门级别'
+            }, {
+                field: 'Desc',
+                title: '描述'
+            } ]
+      })
     </script>
   </body>
 </html>

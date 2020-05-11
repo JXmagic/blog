@@ -79,7 +79,7 @@ function init_child(data,id){
 
 for( y = 0;y<data.length;y++){
 $('#menu_section'+id).append('<ul class="nav side-menu" id="side-menu'+id+y+'">');
- $("#side-menu"+id+y).append('<li><a><i class="fa fa-home"></i> '+data[y].name+' <span class="fa fa-chevron-down"></span></a></li>');
+ $("#side-menu"+id+y).append('<li><a><i class="'+data[y].icon+'"></i> '+data[y].name+' <span class="fa fa-chevron-down"></span></a></li>');
  $("#side-menu"+id+y+" li").append(' <ul id="child_menu'+data[y].id+y+'" class="nav child_menu" >');
  $child_menu = $("#side-menu"+id+y+" li #child_menu"+data[y].id+y);
  init_children(data[y].listMenu,$child_menu);
@@ -101,7 +101,7 @@ var setContentHeight = function () {
 	$RIGHT_COL.css('min-height', $(window).height());
 
 	var bodyHeight = $BODY.outerHeight(),
-		footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+		footerHeight = $BODY.hasClass('footer_fixed') ? -1 : $FOOTER.height(),
 		leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
 		contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
 
