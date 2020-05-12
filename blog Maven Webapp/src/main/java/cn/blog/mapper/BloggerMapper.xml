@@ -17,39 +17,18 @@
     id, username, password, nickname, sign, imag_name, salt, personal_information
   </sql>
 
- 
+ <sql id="Base_Column_Login">
+    id, username, password
+  </sql>
   
-  <select id="selectBloggerByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_blogger
-    where username = #{username}
+  <select id="selectBloggerByName" resultType="cn.blog.pojo.Blogger">
+    select <include refid="Base_Column_Login" /> from t_blogger
+   <where>
+     username = #{username}
+   </where> 
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_blogger
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-
-  <insert id="insert" parameterType="cn.blog.pojo.Blogger">
-    insert into t_blogger (id, username, password, 
-      nickname, sign, imag_name, 
-      salt, personal_information)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{imagName,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{personalInformation,jdbcType=LONGVARCHAR})
+  <insert id="insertBlogger" parameterType="cn.blog.pojo.Blogger">
+      insert into t_blogger (username,password) values(#{username},#{password})
   </insert>
-
-  <update id="updateByPrimaryKey" parameterType="cn.blog.pojo.Blogger">
-    update t_blogger
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      sign = #{sign,jdbcType=VARCHAR},
-      imag_name = #{imagName,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>

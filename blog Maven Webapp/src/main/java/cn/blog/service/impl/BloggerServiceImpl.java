@@ -18,4 +18,10 @@ public class BloggerServiceImpl implements BloggerService{
 		return bloggerMapper.selectBloggerByName(name);
 	}
 
+	@Override
+	public int addBlogger(Blogger blogger) {
+		
+		return bloggerMapper.insertBlogger(blogger);
+	}
+
 }

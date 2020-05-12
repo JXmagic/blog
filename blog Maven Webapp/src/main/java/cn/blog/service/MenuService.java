@@ -10,4 +10,6 @@ public interface MenuService {
 	 * @return
 	 */
     public List<Menu> getAllMenu();
+    
+    
 }

@@ -39,7 +39,7 @@
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
 						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
-							<span>张三的博客</span></a>
+							<span>${user.username}的博客</span></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -52,7 +52,7 @@
 						</div>
 						<div class="profile_info">
 							<span>欢迎,</span>
-							<h2>张三</h2>
+							<h2>${user.username}</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
@@ -115,13 +115,15 @@
 					<nav>
 
 						<ul class="nav navbar-nav navbar-right">
-							<li class=""><a href="javascript:;"
+							<li class="">
+							 
+							<a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="">张三
+								aria-expanded="false"> <img src="images/img.jpg" alt="">${user.username}
 									<span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="login.html"><i
+									<li><a href="logout"><i
 											class="fa fa-sign-out pull-right"></i> 退出</a></li>
 								</ul></li>
 						</ul>

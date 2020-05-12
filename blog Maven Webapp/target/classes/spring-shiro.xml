@@ -17,16 +17,17 @@
         <!-- 装配 securityManager -->
         <property name="securityManager" ref="securityManager" />
         <!-- 配置登陆页面 -->
-        <property name="loginUrl" value="/user/login" />
-        <!-- 登陆成功后的一面 -->
-        <property name="successUrl" value="/md5/index" />
-        <property name="unauthorizedUrl" value="/user/unauthorized" />
+        <property name="loginUrl" value="page/log_in" />
         <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. -->
         <property name="filterChainDefinitions">
             <value>
-                /user/login = anon
-                /user/register = anon
-                /logout = logout
+                /css/** = anon
+                /js/** = anon
+                /vendors/** = anon
+                /page/logout = logout   
+                /page/log_in = anon
+                /page/** = authc 
+                
             </value>
         </property>
     </bean>
