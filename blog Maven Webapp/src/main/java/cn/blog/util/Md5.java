@@ -1,5 +1,7 @@
 package cn.blog.util;
 
+import java.util.UUID;
+
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
@@ -18,4 +20,8 @@ public class Md5 {
 	    return result.toString();
 	}
 	
+	public static final String salt() {
+		String string = UUID.randomUUID().toString().replaceAll("-", "");
+		return string;
+	}
 }

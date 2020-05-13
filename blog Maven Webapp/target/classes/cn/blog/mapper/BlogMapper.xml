@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.blog.mapper.BlogMapper">
+  
+  <resultMap id="BaseResultMap" type="cn.blog.pojo.Blog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="clicks" jdbcType="INTEGER" property="clicks" />
+    <result column="replies" jdbcType="INTEGER" property="replies" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="key_word" jdbcType="VARCHAR" property="keyWord" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+ 
+ 
+  <insert id="insertBlog" parameterType="cn.blog.pojo.Blog">
+      insert into t_blog (title,type_id,content) values(#{title},#{typeId},#{content} )
+  </insert>
+</mapper>

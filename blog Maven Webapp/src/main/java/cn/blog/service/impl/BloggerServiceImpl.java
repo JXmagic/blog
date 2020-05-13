@@ -24,4 +24,15 @@ public class BloggerServiceImpl implements BloggerService{
 		return bloggerMapper.insertBlogger(blogger);
 	}
 
+	@Override
+	public String getSaltByName(String name) {
+		String selectSaltByName = bloggerMapper.selectSaltByName(name);
+		if(selectSaltByName != null) {
+			return selectSaltByName;
+		}
+		return "";
+	}
+	
+	
+
 }

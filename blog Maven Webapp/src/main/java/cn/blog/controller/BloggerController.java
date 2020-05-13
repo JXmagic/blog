@@ -29,12 +29,7 @@ public class BloggerController {
 		return "/login";
 	}
 
-	@RequestMapping(value = "/blogger", method = RequestMethod.GET)
-	public String blogger() {
-
-		return "/blogger/blogger";
-	}
-
+	
 	@RequestMapping(value = "/log_in", method = RequestMethod.POST)
 	@ResponseBody
 	public CustomParameter getBlogger(Blogger blogger) {
@@ -48,12 +43,14 @@ public class BloggerController {
 		}else if(password ==""){
 			customParameter.setMsg("密码不能为空！");
 		}else{
-			String passwordMD5 = Md5.md5(password, "zjx19930302");
+			String salt = bloggerService.getSaltByName(username);
+			System.out.println("salt"+salt);
+			String passwordMD5 = Md5.md5(password, salt);
 			blogger.setPassword(passwordMD5);
 			UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, passwordMD5);
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();
-			//if(!subject.isAuthenticated()) {//认证		
+			if(!subject.isAuthenticated()) {//认证		
 				try {
 					subject.login(usernamePasswordToken);
 					session.setAttribute("user", blogger);
@@ -62,7 +59,7 @@ public class BloggerController {
 				} catch (AuthenticationException e) {
 					customParameter.setMsg("用户名或密码错误！");
 				}
-			//}
+			}
 		}
 		
 		return customParameter;
@@ -81,7 +78,9 @@ public class BloggerController {
 		}else if(password ==""){
 			customParameter.setMsg("密码不能为空！");
 		}else{
-			String pass=Md5.md5(password, "zjx19930302");
+			String salt = Md5.salt();//生成随机数
+			String pass=Md5.md5(password, salt);
+			blogger.setSalt(salt);
 			blogger.setPassword(pass);
 			int addBlogger = bloggerService.addBlogger(blogger);
 			customParameter.setStatus(addBlogger);

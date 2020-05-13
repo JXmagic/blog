@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentelella Alela! |</title>
+<title>个人博客</title>
 
 <!-- Bootstrap -->
 <link
@@ -30,6 +30,7 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/css/custom.min.css"
 	rel="stylesheet">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">	
 </head>
 
 <body class="login">
@@ -83,7 +84,7 @@
 					<form id="regist">
 						<h1>创建账户</h1>
 						<div>
-							<input type="text" class="form-control" name="username" id="username" value=""
+							<input type="text" class="form-control" name="username" value=""
 								placeholder="用户名" required="" />
 						</div>
 
@@ -159,7 +160,7 @@
                                 
              $.ajax({
                  type:"post",
-                 url:"register",
+                 url:"page/register",
                  dataType: "json",
                  data:d,
                  success:function(data){

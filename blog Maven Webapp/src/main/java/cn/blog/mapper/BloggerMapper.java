@@ -9,4 +9,6 @@ public interface BloggerMapper {
 	Blogger selectBloggerByName(@Param("username") String name);
 	
 	int insertBlogger(Blogger blogger);
+	
+	String selectSaltByName(String username);
 }

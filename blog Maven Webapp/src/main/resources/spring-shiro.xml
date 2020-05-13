@@ -24,6 +24,7 @@
                 /css/** = anon
                 /js/** = anon
                 /vendors/** = anon
+                /page/register = anon   
                 /page/logout = logout   
                 /page/log_in = anon
                 /page/** = authc 

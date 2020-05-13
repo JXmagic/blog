@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>博客</title>
+<title>个人博客</title>
 
 <!-- Bootstrap -->
 <link
@@ -29,7 +29,7 @@
 	rel="stylesheet">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/vendors/bootstrap-table/dist/bootstrap-table.css"></script>
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">	
 </head>
 
 <body class="nav-md">

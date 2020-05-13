@@ -28,7 +28,15 @@
    </where> 
   </select>
   
+   <select id="selectSaltByName" resultType="String">
+       select salt from t_blogger 
+       <where>
+         username = #{username}
+       </where>
+   </select>
   <insert id="insertBlogger" parameterType="cn.blog.pojo.Blogger">
-      insert into t_blogger (username,password) values(#{username},#{password})
+      insert into t_blogger (username,password,salt) values(#{username},#{password},#{salt})
   </insert>
+  
+  
 </mapper>
