@@ -37,6 +37,18 @@
   <insert id="insertBlogger" parameterType="cn.blog.pojo.Blogger">
       insert into t_blogger (username,password,salt) values(#{username},#{password},#{salt})
   </insert>
-  
-  
+   
+   <!-- 个人信息 -->
+     
+    <select id="selectBloggerInformationByName" resultType="cn.blog.pojo.Blogger">
+    select <include refid="Base_Column_List" /> from t_blogger
+   <where>
+     username = #{username}
+   </where> 
+  </select>
+   <!-- 修改个人信息 -->
+    <update id="updateBloggerInformationByName" parameterType="cn.blog.pojo.Blogger">
+        update t_blogger set personal_information = #{personalInformation}
+        ,nickname = #{nickname},sign = #{sign} where username = #{username}
+    </update>
 </mapper>

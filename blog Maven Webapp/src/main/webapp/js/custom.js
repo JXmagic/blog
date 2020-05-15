@@ -171,7 +171,6 @@ var setContentHeight = function () {
 // /Sidebar
 
 
-
 	$(document).ready(function() {
 
 		init_sidebar();

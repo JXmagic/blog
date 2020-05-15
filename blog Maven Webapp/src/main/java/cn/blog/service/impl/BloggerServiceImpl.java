@@ -32,6 +32,18 @@ public class BloggerServiceImpl implements BloggerService{
 		}
 		return "";
 	}
+
+	@Override
+	public Blogger getBloggerInformationByName(String username) {
+		
+		return bloggerMapper.selectBloggerInformationByName(username);
+	}
+
+	@Override
+	public int upBloggerInformationByName(Blogger blogger) {
+		
+		return bloggerMapper.updateBloggerInformationByName(blogger);
+	}
 	
 	
 

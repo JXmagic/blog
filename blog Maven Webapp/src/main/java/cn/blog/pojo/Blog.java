@@ -2,6 +2,7 @@ package cn.blog.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Blog implements Serializable{
 	
@@ -27,7 +28,9 @@ public class Blog implements Serializable{
     private String keyWord;
     //内容
     private String content;
-
+    
+    private List<Blogtype> listBlogtype;
+    
     public Integer getId() {
         return id;
     }
@@ -99,4 +102,12 @@ public class Blog implements Serializable{
     public void setContent(String content) {
         this.content = content;
     }
+
+	public List<Blogtype> getListBlogtype() {
+		return listBlogtype;
+	}
+
+	public void setListBlogtype(List<Blogtype> listBlogtype) {
+		this.listBlogtype = listBlogtype;
+	}
 }

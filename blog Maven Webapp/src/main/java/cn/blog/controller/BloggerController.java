@@ -10,26 +10,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import cn.blog.pojo.Blogger;
 import cn.blog.service.BloggerService;
 import cn.blog.util.CustomParameter;
 import cn.blog.util.Md5;
-
+/**
+ * 个人信息，登录
+ * @author Magic
+ *
+ */
 @Controller
 @RequestMapping(value = "/page")
 public class BloggerController {
 
 	@Autowired
 	private BloggerService bloggerService;
-
+    
+	/**
+	 * 登录相关
+	 * @return
+	 */
 	@RequestMapping(value = "/open_login", method = RequestMethod.GET)
 	public String open_login() {
-		System.out.println("hahah");
 		return "/login";
 	}
-
 	
+
+	/**
+	 * 登录
+	 * @param blogger
+	 * @return
+	 */
 	@RequestMapping(value = "/log_in", method = RequestMethod.POST)
 	@ResponseBody
 	public CustomParameter getBlogger(Blogger blogger) {
@@ -64,7 +77,11 @@ public class BloggerController {
 		
 		return customParameter;
 	}
-	
+	/**
+	 * 注册
+	 * @param blogger
+	 * @return
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public CustomParameter register(Blogger blogger) {
@@ -86,6 +103,57 @@ public class BloggerController {
 			customParameter.setStatus(addBlogger);
 		}
 		
+		return customParameter;
+	}
+	
+	/**
+	 * 个人信息管理
+	 * @return
+	 */
+	@RequestMapping(value = "/blogger_information_manage", method = RequestMethod.GET)
+	public String bloggerInformationManage() {
+		return "blogger/blogger_information_manage";
+	}
+	
+     /**
+      * 获取用户信息
+      * @param blogger
+      * @return
+      */
+	@RequestMapping(value = "/getBloggerinformation", method = RequestMethod.GET)
+	@ResponseBody
+	public CustomParameter getBloggerInformation(@SessionAttribute("user") Blogger blogger) {
+		CustomParameter customParameter = new CustomParameter();
+		
+		Blogger bloggerInformation = bloggerService.getBloggerInformationByName(blogger.getUsername());
+		if(bloggerInformation!=null) {
+			customParameter.setData(bloggerInformation);
+			customParameter.setStatus(1);
+		}else {
+			customParameter.setStatus(0);
+		}
+		return customParameter;
+	}
+	
+	/**
+	 * 修改用户信息
+	 * @param blogger 用户传的blogger
+	 * @param user session中的bloger
+	 * @return
+	 */
+	@RequestMapping(value = "/upBloggerinformation", method = RequestMethod.POST)
+	@ResponseBody
+	public CustomParameter upBloggerInformation(@SessionAttribute("user") Blogger user, Blogger blogger) {
+		CustomParameter customParameter = new CustomParameter();
+		blogger.setUsername(user.getUsername());
+		int upBloggerInformation = bloggerService.upBloggerInformationByName(blogger);
+		if(upBloggerInformation==1) {
+			customParameter.setStatus(1);
+			customParameter.setMsg("修改成功！");
+		}else {
+			customParameter.setMsg("修改失败！");
+			customParameter.setStatus(0);
+		}
 		return customParameter;
 	}
 }

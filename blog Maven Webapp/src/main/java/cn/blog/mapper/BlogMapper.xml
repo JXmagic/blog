@@ -12,10 +12,42 @@
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="key_word" jdbcType="VARCHAR" property="keyWord" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <collection property="listBlogtype" javaType="List" ofType="cn.blog.pojo.Blogtype" >
+        <id column="blogtype_id" property="id"/>
+        <result column="type_name" property="typeName"/>
+        <result column="order_no" property="orderNo"/>
+    </collection>
   </resultMap>
  
  
+   <!-- 获取所有的博客 --> 
+   <select id="selectAllBlog" resultMap="BaseResultMap">
+      select   b.id,b.title,b.publish_date,t.type_name,b.type_id,t.id as blogtype_id  from t_blog b
+      inner join t_blogtype t on b.type_id = t.id
+   </select>
+   
+      <!-- 获取博客文章 --> 
+   <select id="selectById" resultType="cn.blog.pojo.Blog">
+      select  id, content from t_blog where id =#{id}
+   </select>
+   
+  <!-- 插入博客 -->
   <insert id="insertBlog" parameterType="cn.blog.pojo.Blog">
-      insert into t_blog (title,type_id,content) values(#{title},#{typeId},#{content} )
+      insert into t_blog (title,publish_date,type_id,content) values(#{title},#{publishDate},#{typeId},#{content} )
   </insert>
+  
+  <!-- 删除博客 -->
+  <delete id="deleteBlog" parameterType="Integer">
+      delete from t_blog 
+      <where>
+       id in 
+       <foreach collection="list" open="(" close=")"  separator="," item="id">
+         #{id} 
+       </foreach>
+      </where>
+  </delete>
+   <!-- 更新 -->
+  <update id="updateBlog" parameterType="cn.blog.pojo.Blog">
+      update t_blog set title = #{title},type_id = #{typeId},content = #{content} where id = #{id}
+  </update>
 </mapper>
