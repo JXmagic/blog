@@ -136,16 +136,16 @@
             d = $("#login").serialize();
               $.ajax({
                  type:"post",
-                 url:"page/log_in",
+                 url:"${pageContext.request.contextPath}/page/doLogin",
                  dataType: "json",
-                 data: d,        
+                 data: d,    
                  success:function(data){
 	         	     console.log(data);
 	         	     if(data.status==0){
 	         	        $("#message").text(data.msg);
 	         	     }else if(data.status==1){
 	         	         $("#message").text("");
-	         	         window.location.href="page/blogtype";
+	         	         window.location.href="${pageContext.request.contextPath}/page/blogtype";
 	         	     }
 	         	     
 	         	   

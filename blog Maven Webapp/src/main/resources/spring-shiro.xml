@@ -17,16 +17,17 @@
         <!-- 装配 securityManager -->
         <property name="securityManager" ref="securityManager" />
         <!-- 配置登陆页面 -->
-        <property name="loginUrl" value="page/log_in" />
+        <property name="loginUrl" value="/page/login" />
         <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. -->
         <property name="filterChainDefinitions">
             <value>
                 /css/** = anon
                 /js/** = anon
                 /vendors/** = anon
+                /page/login = anon
+                /page/doLogin = anon 
                 /page/register = anon   
-                /page/logout = logout   
-                /page/log_in = anon
+                /page/login = logout   
                 /page/** = authc 
                 
             </value>

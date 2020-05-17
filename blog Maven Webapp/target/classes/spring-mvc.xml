@@ -19,13 +19,22 @@
      <!-- 2开启MVC注解扫描 -->
 	<mvc:annotation-driven />
 	   
-     
+     <!-- 配置拦截器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/page/doLogin"/>
+			<bean class="cn.blog.handlerinterceptor.LoginHandlerInterceptor"></bean>			
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
 	  
 
 	<!-- 静态资源由WEB服务器默认的Servlet来处理 -->
 	<mvc:resources mapping="/resourse/**"
 		location="/resourse/" />
 	<mvc:default-servlet-handler />
+	
+
 
 	<!-- 定义视图解析器ViewResolver -->
 	<bean id="viewResolver"

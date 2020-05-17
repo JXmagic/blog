@@ -32,7 +32,7 @@ public class BloggerController {
 	 * 登录相关
 	 * @return
 	 */
-	@RequestMapping(value = "/open_login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String open_login() {
 		return "/login";
 	}
@@ -43,7 +43,7 @@ public class BloggerController {
 	 * @param blogger
 	 * @return
 	 */
-	@RequestMapping(value = "/log_in", method = RequestMethod.POST)
+	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public CustomParameter getBlogger(Blogger blogger) {
 		 CustomParameter customParameter = new CustomParameter();

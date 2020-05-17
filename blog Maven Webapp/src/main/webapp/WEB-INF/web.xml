@@ -6,6 +6,7 @@
 	<display-name>blog Maven Webapp</display-name>
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/page/login.jsp</welcome-file>
+		<!-- /WEB-INF/page/login.jsp -->
 	</welcome-file-list>
 	  
 	
@@ -23,10 +24,6 @@
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-		 <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-        <dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
 	<!-- 字符编码过滤器 -->
@@ -71,4 +68,5 @@
     <servlet-name>spring</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+ 
 </web-app>
